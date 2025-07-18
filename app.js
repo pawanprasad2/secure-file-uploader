@@ -4,6 +4,7 @@ const  express = require('express')
 const connectDB=require("./config/db.config")
 const cookieparser =require("cookie-parser")
 const homerouter=require("./routes/index.routes")
+const upload =require('./config/multer.config')
 const app =express()
 
 const userRouter =require('./routes/user.routes')
