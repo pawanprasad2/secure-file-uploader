@@ -14,16 +14,22 @@
       class="bg-gray-100 dark:bg-gray-800 h-screen w-screen flex justify-center items-center"
     >
       <form class="w-95" action="/user/login" method="post">
+        <% if (success_msg) { %>
+        <p class="text-green-400 p-4"><%= success_msg %></p>
+        <% } %> <% if (error_msg) { %>
+        <p  class="text-red-400 mt-2 text-l""><%= error_msg %></p>
+        <% } %>
+        <h1 class="mb-4 text-2xl text-white" >Login </h1>
         <div>
           <label
             for="username"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            class="block mb-2 text-l font-medium text-gray-900 dark:text-white"
             >user name</label
           >
           <input
             type="text"
             id="username"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border mb-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="John"
             name="username"
             required
@@ -32,7 +38,7 @@
         <div class="mb-6">
           <label
             for="password"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            class="block mb-2 text-l font-medium text-gray-900 dark:text-white"
             >Password</label
           >
           <input

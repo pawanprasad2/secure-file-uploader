@@ -15,6 +15,10 @@
     >
       <form class="w-95" action="/user/register" method="post">
         <div>
+          <h1 class="text-white text-2xl mb-5">Register user</h1>
+          <% if (error_msg) { %>
+          <p class="text-red-400 mt-2 text-l"><%= error_msg %></p>
+          <% } %>
           <label
             for="username"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -23,7 +27,7 @@
           <input
             type="text"
             id="username"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 mb-4 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="John"
             name="username"
             required

@@ -13,7 +13,6 @@ router.get("/", authMiddleware, async (req, res) => {
 
   res.render("home", {
     files: userFiles,
-    success: req.query.success,
   });
 });
 
@@ -27,8 +26,14 @@ router.post(
       orginalname: req.file.originalname,
       user: req.user.userId,
     });
+    if (!req.file) {
+      req.flash("error_msg", "No file uploaded");
+      return res.redirect("/");
+    }
 
-    res.redirect("/?success=1");
+    // ✅ Set flash message
+    req.flash("success_msg", "File uploaded successfully!");
+    res.redirect("/");
   }
 );
 
