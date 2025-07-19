@@ -13,9 +13,9 @@
     <div
       class="bg-gray-100 dark:bg-gray-800 h-screen w-screen flex justify-center items-center"
     >
-      <form class="w-95" action="/user/register" method="post">
+      <form class="w-95 flex flex-col  " action="/user/register" method="post">
         <div>
-          <h1 class="text-white text-2xl mb-5">Register user</h1>
+          <h1 class="text-white text-2xl mb-5">Create An Account</h1>
           <% if (error_msg) { %>
           <p class="text-red-400 mt-2 text-l"><%= error_msg %></p>
           <% } %>
@@ -49,7 +49,7 @@
             required
           />
         </div>
-        <div class="mb-6">
+        <div class="mb-6 ">
           <label
             for="password"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -67,10 +67,11 @@
 
         <button
           type="submit"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="text-white mb-4   bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Submit
         </button>
+        <p class="ml-20 text-white text-sm " >Already have an account? <a href="/user/login" class="text-blue-400 hover:text-blue-700 ">Login here </a> </p>
       </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>

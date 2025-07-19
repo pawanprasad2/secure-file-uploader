@@ -4,15 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <style>
       .glass {
         backdrop-filter: blur(20px);
@@ -20,98 +13,80 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
       .pop {
-        transition: all 0.3s ease;
+        transition: 0.3s ease;
       }
       .pop.hidden {
         opacity: 0;
         visibility: hidden;
-        transform: scale(0.9);
-      }
-      .file-card {
-        transition: all 0.2s ease;
+        transform: scale(0.95);
       }
       .file-card:hover {
         transform: translateY(-2px);
-      }
-      .upload-btn {
-        transition: all 0.3s ease;
       }
       .upload-btn:hover {
         transform: translateY(-1px);
         box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
       }
+       .alert {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
     </style>
   </head>
 
   <body>
     <main>
-      <div class="bg-gray-800 min-h-screen relative">
-        <!-- Header -->
+      <div class="bg-gray-800 flex flex-col min-h-screen">
+        <div class="m-7  flex justify-end  " >
+          <a href="/user/logout" class="bg-red-500 hover:bg-red-800 text-white px-4 py-2 rounded-xl">Logout</a>
 
-        <div class="text-center pt-8 pb-6">
-          <h1 class="text-4xl font-bold text-white mb-2">File Manager</h1>
-          <p class="text-blue-100">Upload and manage your files seamlessly</p>
+        </div>
+        <!-- Header -->
+        <div class="text-center py-4">
+          <h1 class="text-4xl font-bold mb-2 text-white">File Manager</h1>
+          <p class="text-blue-100 mb-2">Upload and manage your files seamlessly</p>
         </div>
 
         <!-- Upload Button -->
         <div class="flex justify-center mb-8">
-          <button
-            onclick="showPopUP()"
-            class="upload-btn bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg flex items-center gap-3 text-lg font-semibold"
-          >
-            <i class="ri-upload-cloud-line text-xl"></i>
-            Upload New File
+          <button onclick="showPopUP()" class="upload-btn bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg flex items-center gap-3 text-lg font-semibold">
+            <i class="ri-upload-cloud-line text-xl"></i> Upload New File
           </button>
         </div>
 
         <!-- Upload Modal -->
-        <div
-          class="pop hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
-        >
+        <div class="pop hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
           <div class="glass rounded-3xl p-8 max-w-md w-full relative">
-            <button
-              onclick="hidePop()"
-              class="absolute top-4 right-4 text-white hover:text-red-400 text-2xl"
-            >
+            <button onclick="hidePop()" class="absolute top-4 right-4 text-white hover:text-red-400 text-2xl">
               <i class="ri-close-line"></i>
             </button>
 
-            <h2 class="text-2xl font-bold text-white mb-6 text-center">
-              Upload File
-            </h2>
+            <h2 class="text-2xl font-bold text-white mb-6 text-center">Upload File</h2>
 
             <form action="/upload" method="post" enctype="multipart/form-data">
-              <label for="dropzone-file" class="block">
-                <div
-                  id="dropzone"
-                  class="border-2 border-dashed border-blue-300 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-400 bg-white/5 hover:bg-white/10"
-                >
+              <label for="dropzone-file">
+                <div id="dropzone" class="border-2 border-dashed border-blue-300 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-400 bg-white/5 hover:bg-white/10">
                   <div class="flex flex-col items-center">
-                    <div
-                      class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4"
-                    >
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4">
                       <i class="ri-upload-cloud-2-line text-2xl text-white"></i>
                     </div>
-                    <p id="upload-text" class="text-white font-semibold mb-2">
-                      Click to upload or drag and drop
-                    </p>
+                    <p id="upload-text" class="text-white font-semibold mb-2">Click to upload or drag and drop</p>
                     <p class="text-blue-200 text-sm">Max file size: 10MB</p>
                   </div>
                 </div>
-                <input
-                  id="dropzone-file"
-                  type="file"
-                  class="hidden"
-                  name="file"
-                />
+                <input id="dropzone-file" type="file" name="file" class="hidden" />
               </label>
 
-              <button
-                id="upload-submit"
-                type="submit"
-                class="w-full mt-6 bg-gray-500 cursor-not-allowed text-white py-3 rounded-xl font-semibold shadow-lg"
-                disabled
-              >
+              <button id="upload-submit" type="submit" disabled class="w-full mt-6 bg-gray-500 text-white py-3 rounded-xl font-semibold shadow-lg cursor-not-allowed">
                 <i class="ri-upload-line mr-2"></i>Select a file first
               </button>
             </form>
@@ -123,45 +98,36 @@
           <div class="mb-6">
             <h2 class="text-2xl font-bold text-white mb-2">Your Files</h2>
             <p class="text-blue-100">Click to download any file</p>
+    <% if (success_msg && success_msg.length > 0) { %>
             <% if (success_msg) { %>
-            <p class="text-green-400 mt-2 text-l"><%= success_msg %></p>
-            <% } %> <% if (error_msg) { %>
-            <p class="text-red-400 mt-2 text-l"><%= error_msg %></p>
+              <p id="success" class="alert success "><%= success_msg %></p>
+            <% } %>
+       <% } %>
+       <% if (error_msg && error_msg.length > 0) { %>
+            <% if (error_msg) { %>
+              <p id="error" class=" alert error hidden "><%= error_msg %></p>
+            <% } %>
             <% } %>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <% files.forEach((file, index) => { %>
-            <div
-              class="file-card glass rounded-xl p-4 cursor-pointer"
-              style="animation-delay: <%= index * 0.1 %>s"
-            >
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3 flex-1 min-w-0">
-                  <div
-                    class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0"
-                  >
-                    <i class="ri-file-line text-white"></i>
+              <div class="file-card glass rounded-xl p-4 cursor-pointer" style="animation-delay: <%= index * 0.1 %>s">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3 flex-1 min-w-0">
+                    <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <i class="ri-file-line text-white"></i>
+                    </div>
+                    <div class="min-w-0 w-full">
+                      <h3 class="text-white font-medium truncate"><%= file.orginalname %></h3>
+                      <p class="text-blue-200 text-sm truncate">Ready to download</p>
+                    </div>
                   </div>
-                  <div class="min-w-0 w-full">
-                    <h3 class="text-white font-medium truncate">
-                      <%= file.orginalname %>
-                    </h3>
-                    <p class="text-blue-200 text-sm truncate">
-                      Ready to download
-                    </p>
-                  </div>
+                  <a href="/download/<%= file.path %>" download="<%= file.orginalname %>" target="_blank" class="w-10 h-10 bg-green-500 hover:bg-green-600 rounded-lg flex items-center justify-center ml-2">
+                    <i class="ri-download-line text-white"></i>
+                  </a>
                 </div>
-                <a
-                  href="/download/<%= file.path %>"
-                  class="w-10 h-10 bg-green-500 hover:bg-green-600 rounded-lg flex items-center justify-center ml-2"
-                  download="<%= file.orginalname %>"
-                  target="_blank"
-                >
-                  <i class="ri-download-line text-white"></i>
-                </a>
               </div>
-            </div>
             <% }) %>
           </div>
         </div>
@@ -172,39 +138,42 @@
       function showPopUP() {
         document.querySelector(".pop").classList.remove("hidden");
       }
+
       function hidePop() {
         document.querySelector(".pop").classList.add("hidden");
       }
 
-      // Handle file selection
-      document
-        .getElementById("dropzone-file")
-        .addEventListener("change", function (e) {
-          const file = e.target.files[0];
-          const uploadText = document.getElementById("upload-text");
-          const uploadBtn = document.getElementById("upload-submit");
-          const dropzone = document.getElementById("dropzone");
+      setTimeout(()=>{
+        const success = document.getElementById("success")
+        const error =document.getElementById("error")
+        if(success) success.style.display= "none"
+        if(error) success.style.display="none"
+      },5000)
 
-          if (file) {
-            uploadText.textContent = `Selected: ${file.name}`;
-            dropzone.classList.replace("border-blue-300", "border-green-400");
-            dropzone.classList.add("bg-green-500/10");
-            uploadBtn.disabled = false;
-            uploadBtn.className =
-              "w-full mt-6 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold shadow-lg cursor-pointer";
-            uploadBtn.innerHTML =
-              '<i class="ri-check-line mr-2"></i>Upload File';
-          } else {
-            uploadText.textContent = "Click to upload or drag and drop";
-            dropzone.classList.replace("border-green-400", "border-blue-300");
-            dropzone.classList.remove("bg-green-500/10");
-            uploadBtn.disabled = true;
-            uploadBtn.className =
-              "w-full mt-6 bg-gray-500 cursor-not-allowed text-white py-3 rounded-xl font-semibold shadow-lg";
-            uploadBtn.innerHTML =
-              '<i class="ri-upload-line mr-2"></i>Select a file first';
-          }
-        });
+
+
+      document.getElementById("dropzone-file").addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        const uploadText = document.getElementById("upload-text");
+        const uploadBtn = document.getElementById("upload-submit");
+        const dropzone = document.getElementById("dropzone");
+
+        if (file) {
+          uploadText.textContent = `Selected: ${file.name}`;
+          dropzone.classList.replace("border-blue-300", "border-green-400");
+          dropzone.classList.add("bg-green-500/10");
+          uploadBtn.disabled = false;
+          uploadBtn.className = "w-full mt-6 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold shadow-lg cursor-pointer";
+          uploadBtn.innerHTML = '<i class="ri-check-line mr-2"></i>Upload File';
+        } else {
+          uploadText.textContent = "Click to upload or drag and drop";
+          dropzone.classList.replace("border-green-400", "border-blue-300");
+          dropzone.classList.remove("bg-green-500/10");
+          uploadBtn.disabled = true;
+          uploadBtn.className = "w-full mt-6 bg-gray-500 text-white py-3 rounded-xl font-semibold shadow-lg cursor-not-allowed";
+          uploadBtn.innerHTML = '<i class="ri-upload-line mr-2"></i>Select a file first';
+        }
+      });
     </script>
   </body>
 </html>
